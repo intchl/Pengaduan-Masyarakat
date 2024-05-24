@@ -13,6 +13,15 @@
     <link rel="stylesheet" href="../a/fontawesome/css/all.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
+    <?php
+        include '../a/koneksi.php';
+        session_start();
+        if($_SESSION['status'] != "user_login"){
+            header("location:login.php?alert=belum_login");
+        }
+
+        $nik = $_SESSION['nik'];
+    ?>
     
 
 </head>
@@ -44,18 +53,23 @@
 
                     <h4 class="card-title text-danger" style="text-align: center;">FORMULIR PENGADUAN TINDAK KRIMINAL POLSEK RUMBAI</h4>
                     <hr>
-                    <form action="ceklaporan.php" method="POST">
+                    <form action="ceklaporan.php" enctype="multipart/form-data" method="POST">
                         <div class="form-row mb-3">
                         <div class="col">
                             <label for="tanggal" class="text-lg">Tanggal</label>
                             <input type="date" class="form-control mb-2" id="tanggal" name="tgl_pengaduan" style="border-radius: 15px;" required>
 
-                            <label for="nik" class="text-lg">NIK</label>
-                            <input type="number" class="form-control mb-2" id="nik" name="nik" style="border-radius: 15px;" required>
-                            <p class="text-body-secondary" style="font-size:smaller;">Pastikan NIK anda benar!</p>
+                            <input type="hidden" class="form-control mb-2" id="nik" value="<?= $nik?>" name="nik" style="border-radius: 15px;" required readonly>
+                            
+                            <label for=" foto" class="text-lg">Tempat Kejadian</label>
+                            <input type="text" class="form-control mb-2" id="tmpt_kejadian" name="tmpt_kejadian" style="border-radius: 15px;" required>
 
-                            <label for=" foto" class="text-lg">Foto</label>
-                            <input type="file" class="form-control-file" id="foto" name="foto" required>
+                            <label for=" foto" class="text-lg">Foto</label><br>
+                            <input type="file" class="form-control-file mb-2" id="foto" name="foto" required>
+                            <br>
+                            <label for=" video" class="text-lg">Video</label><br>
+                            <input type="file" class="form-control-file" id="video" name="video" required>
+                            
                         </div>
                         <div class="col mt-3">
                             <label for="isi">Isi laporan</label>

@@ -29,6 +29,7 @@ if($cek > 0){
 		$_SESSION['user'] = $data['username']; //sebelah kiri dari variabel yg dibikin, kanan dari field database
 		$_SESSION['pass'] = $data['password'];
 		$_SESSION['telp'] = $data['telp'];
+		$_SESSION['alamat'] = $data['alamat'];
         $_SESSION['status'] = "user_login"; //untuk memanggil field tampil di index
 		// alihkan ke halaman dashboard admin
 		echo "<script>alert('Selamat Datang!');document.location='index.php'</script>";

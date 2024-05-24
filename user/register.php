@@ -34,6 +34,9 @@
                     <div class="form-group">
                         <input type="number" class="form-control py-2 mb-4 shadow-sm" placeholder="No telepon" style="border-radius: 25px;" name="telp" required>
                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control py-2 mb-3 shadow-sm" placeholder="Alamat" style="border-radius: 25px;" name="alamat" required>
+                    </div>
                     <div class="mb-2 text-center">
                         <a href="login.php" class="text-white" style="text-decoration: none;">Sudah Punya Akun?</a>
                     </div>

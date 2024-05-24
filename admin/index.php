@@ -12,11 +12,11 @@ $pengaduan = mysqli_query($koneksi, "SELECT * FROM pengaduan ORDER BY id_pengadu
 $tanggapan = mysqli_query($koneksi, "SELECT * FROM tanggapan ORDER BY id_tanggapan DESC LIMIT 1");
 
 // mengambil angka akun masyarakat dari database
-$masyarakat = mysqli_query($koneksi, "SELECT * FROM masyarakat ORDER BY nik  DESC LIMIT 1");
+$masyarakat = mysqli_query($koneksi, "SELECT * FROM masyarakat ORDER BY id  DESC LIMIT 1");
 
 // query untuk menjalankan looping generate
 $query = "SELECT * FROM (( tanggapan INNER JOIN pengaduan ON tanggapan.id_pengaduan = pengaduan.id_pengaduan )
-                          INNER JOIN petugas ON tanggapan.id_petugas = petugas.id_petugas )";
+                          INNER JOIN petugas ON tanggapan.nama_petugas = petugas.nama_petugas )";
 
 $result = mysqli_query($koneksi, $query);
 
@@ -33,6 +33,13 @@ $result = mysqli_query($koneksi, $query);
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
     <title>DashMin</title>
+    <?php
+        include '../a/koneksi.php';
+        session_start();
+        if($_SESSION['status'] != "admin_login"){
+            header("location:../login.php?alert=belum_login");
+        }
+    ?>
   </head>
 
   <body>
@@ -69,36 +76,13 @@ $result = mysqli_query($koneksi, $query);
       <!-- Page Content -->
       <div id="page-content-wrapper" >
         <nav class="navbar navbar-expand-lg navbar-light py-3 px-4 shadow" style="background-color: maroon;">
-          <div class="d-flex align-items-center">
+          <div class="col-6 d-flex align-items-center">
             <i class="fas fa-align-left text-white fs-4 me-3" id="menu-toggle" data-aos="fade-down"></i>
             <h2 class="fs-2 m-0 text-white" data-aos="fade-down">Dashboard</h2>
           </div>
-
-          <button 
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" ></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent" data-aos="fade-down">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle text-white fw-bold"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <i class="fas fa-user me-2 text-white"></i>John Doe
-                </a>
-              </li>
-            </ul>
+          <div class="col-6 d-flex justify-content-end align-items-center">
+            <i class="fa-solid fa-user text-white fa-sm me-2" data-aos="fade-down"></i>
+            <h6 class=" text-white text-uppercase" data-aos="fade-down"><?php echo $_SESSION['nama'];?></h6>
           </div>
         </nav>
         <!--CONTENT-->
@@ -138,7 +122,7 @@ $result = mysqli_query($koneksi, $query);
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                     <div class="col ms-3">
-                        <div class="h4 py-1 fw-bold text-warning d-flex justify-content-between">5 Akun masyarakat <i class="fas fa-users fa-xl d-flex align-items-center" style="color: #a4adbc;"></i></div>
+                        <div class="h4 py-1 fw-bold text-warning d-flex justify-content-between"><?= $row['id']; ?> Akun masyarakat <i class="fas fa-users fa-xl d-flex align-items-center" style="color: #a4adbc;"></i></div>
                     </div>
                     
                     </div>

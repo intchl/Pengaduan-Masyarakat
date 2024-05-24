@@ -9,6 +9,15 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
     <title>DashGas</title>
+
+    <?php
+        include '../a/koneksi.php';
+        session_start();
+        if($_SESSION['status'] != "petugas_login"){
+            header("location:../login.php?alert=belum_login");
+        }
+    ?>
+
   </head>
 
   <body>
@@ -22,6 +31,7 @@
           <a href="index.php" class="list-group-item list-group-item-action bg-transparent second-text active border-bottom" data-aos="fade-right">
             <i class="fas fa-gauge me-2" ></i>Dashboard</a>
 
+          
           <div class="fw-bold text-uppercase ps-4 pt-2 text-secondary" style="font-size: smaller" data-aos="fade-right">Fiture</div>
 
           <a href="laporan.php" class="list-group-item list-group-item-action bg-transparent second-text fw-semibold" data-aos="fade-right">
@@ -32,6 +42,9 @@
 
           <a href="tanggapan.php" class="list-group-item list-group-item-action bg-transparent second-text fw-semibold" data-aos="fade-right">
             <i class="fas fa-pen-to-square me-2"></i>Tanggapan</a>
+          
+          <a href="user.php" class="list-group-item list-group-item-action bg-transparent second-text fw-semibold" data-aos="fade-right">
+            <i class="fas fa-users me-2"></i>Data User</a>
 
           <a href="../logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold" data-aos="fade-right">
             <i class="fas fa-power-off me-2"></i>Logout</a>
@@ -42,9 +55,13 @@
       <!-- Page Content -->
       <div id="page-content-wrapper" >
         <nav class="navbar navbar-expand-lg navbar-light py-3 px-4 shadow" style="background-color: maroon;">
-          <div class="d-flex align-items-center">
+          <div class="col-6 d-flex align-items-center">
             <i class="fas fa-align-left text-white fs-4 me-3" id="menu-toggle" data-aos="fade-down"></i>
             <h2 class="fs-2 m-0 text-white" data-aos="fade-down">Dashboard</h2>
+          </div>
+          <div class="col-6 d-flex justify-content-end align-items-center">
+            <i class="fa-solid fa-user text-white fa-sm me-2" data-aos="fade-down"></i>
+            <h6 class=" text-white text-uppercase" data-aos="fade-down"><?php echo $_SESSION['nama'];?></h6>
           </div>
 
           <button 
@@ -57,22 +74,6 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" ></span>
           </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent" data-aos="fade-down">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle text-white fw-bold"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <i class="fas fa-user me-2 text-white"></i>John Doe
-                </a>
-              </li>
-            </ul>
-          </div>
         </nav>
 
         <div class="container-fluid">

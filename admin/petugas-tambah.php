@@ -11,6 +11,13 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
     <title>DashMin</title>
+    <?php
+        include '../a/koneksi.php';
+        session_start();
+        if($_SESSION['status'] != "admin_login"){
+            header("location:../login.php?alert=belum_login");
+        }
+    ?>
   </head>
 
   <body>
@@ -45,11 +52,15 @@
       <!-- /#sidebar-wrapper -->
 
       <!-- Page Content -->
-      <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light py-3 px-4 shadow d-flex justify-content-between" style="background-color: maroon;">
-          <div class="d-flex align-items-center">
+      <div id="page-content-wrapper" >
+        <nav class="navbar navbar-expand-lg navbar-light py-3 px-4 shadow" style="background-color: maroon;">
+          <div class="col-6 d-flex align-items-center">
             <i class="fas fa-align-left text-white fs-4 me-3" id="menu-toggle" data-aos="fade-down"></i>
             <h2 class="fs-2 m-0 text-white" data-aos="fade-down">Tambah Petugas</h2>
+          </div>
+          <div class="col-6 d-flex justify-content-end align-items-center">
+            <i class="fa-solid fa-user text-white fa-sm me-2" data-aos="fade-down"></i>
+            <h6 class=" text-white text-uppercase" data-aos="fade-down"><?php echo $_SESSION['nama'];?></h6>
           </div>
         </nav>
 
